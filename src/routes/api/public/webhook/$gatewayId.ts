@@ -27,7 +27,7 @@ export const Route = createFileRoute("/api/public/webhook/$gatewayId")({
           const sent = [
             url.searchParams.get("token"), h.get("x-webhook-token"), h.get("x-token"), h.get("x-hotmart-hottok"),
             h.get("authorization")?.replace(/^Bearer\s+/i, ""), h.get("x-api-key"),
-            typeof body === "object" && body ? String((body as Record<string, unknown>).token ?? (body as Record<string, unknown>).hottok ?? (body as Record<string, unknown>).secret ?? "") : "",
+            typeof body === "object" && body ? String((body as { token?: unknown; hottok?: unknown; secret?: unknown }).token ?? (body as { hottok?: unknown }).hottok ?? (body as { secret?: unknown }).secret ?? "") : "",
           ];
           if (!sent.includes(gw.token)) return new Response("Invalid token", { status: 401 });
         }

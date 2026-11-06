@@ -13,7 +13,7 @@ export const Route = createFileRoute("/api/public/inbox/$userId/$channel")({
         const { data: s } = await db.from("settings").select("cron_secret").eq("user_id", params.userId).maybeSingle();
         const sent = request.headers.get("x-telegram-bot-api-secret-token") ?? request.headers.get("x-batsignal-secret") ?? "";
         if (!s || sent !== s.cron_secret) return new Response("Unauthorized", { status: 401 });
-        const body = (await request.json().catch(() => ({}))) as Record<string, any>;
+        const body = (await request.json().catch(() => ({}))) as { message?: any; edited_message?: any; from?: unknown; phone?: unknown; text?: unknown };
         let from = "";
         let text = "";
         if (params.channel === "telegram") {

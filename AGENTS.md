@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- All user data lives in Supabase tables scoped by `user_id` with owner-only RLS; the browser reads/writes via `src/lib/db.ts` hooks. Why: personal multi-account app with real data, no mock state.
+- Message sending, AI calls and flow execution live only in `src/lib/engine.server.ts`; public routes under `src/routes/api/public/` (webhook, inbox, cron) load it after verifying the caller. Why: one engine shared by webhooks, cron and the UI.
+- Gateway payloads are parsed by the pure `src/lib/normalize.ts` (covered by tests). Why: every platform sends a different shape.

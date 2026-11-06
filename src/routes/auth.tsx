@@ -32,8 +32,8 @@ function AuthPage() {
       ? await supabase.auth.signInWithPassword({ email, password })
       : await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin } });
     setBusy(false);
-    if (error) return toast.error(error.message);
-    if (!data.session) return toast.success("Confirme seu e-mail para entrar.");
+    if (error) { toast.error(error.message); return; }
+    if (!data.session) { toast.success("Confirme seu e-mail para entrar."); return; }
     nav({ to: "/" });
   };
 

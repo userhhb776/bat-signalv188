@@ -50,8 +50,8 @@ function Integrations() {
   const noServers = !servers.isLoading && !servers.data?.length;
 
   const add = () => {
-    if (!server) return toast.error("Escolha um servidor Render");
-    if (p.token && !token) return toast.error(`${platform} exige token`);
+    if (!server) { toast.error("Escolha um servidor Render"); return; }
+    if (p.token && !token) { toast.error(`${platform} exige token`); return; }
     save.mutate({ platform, name: platform, token, render_server_id: server, active: true }, {
       onSuccess: () => { setToken(""); toast.success(`${platform} conectado`); },
       onError: (e) => toast.error(e.message),
