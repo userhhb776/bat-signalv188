@@ -1,6 +1,14 @@
 import { createStart, createCsrfMiddleware, createMiddleware } from "@tanstack/react-start";
 
 import { renderErrorPage } from "./lib/error-page";
+import { supabase } from "./integrations/supabase/client";
+
+// Attaches the signed-in user's token to every server function call.
+const attachAuth = createMiddleware({ type: "function" }).client(async ({ next }) => {
+  const { data } = await supabase.auth.getSession();
+  const token = data.session?.access_token;
+  return next({ headers: token ? { Authorization: `Bearer ${token}` } : {} });
+});
 
 const errorMiddleware = createMiddleware().server(async ({ next }) => {
   try {
@@ -26,4 +34,5 @@ const csrfMiddleware = createCsrfMiddleware({
 
 export const startInstance = createStart(() => ({
   requestMiddleware: [errorMiddleware, csrfMiddleware],
+  functionMiddleware: [attachAuth],
 }));

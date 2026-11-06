@@ -9,122 +9,391 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AgentesRouteImport } from './routes/agentes'
-import { Route as AutomacoesRouteImport } from './routes/automacoes'
-import { Route as CarrinhosRouteImport } from './routes/carrinhos'
-import { Route as ConexoesRouteImport } from './routes/conexoes'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedAgentesRouteImport } from './routes/_authenticated/agentes'
+import { Route as AuthenticatedAjudaRouteImport } from './routes/_authenticated/ajuda'
+import { Route as AuthenticatedAtendimentoRouteImport } from './routes/_authenticated/atendimento'
+import { Route as AuthenticatedAutomacoesRouteImport } from './routes/_authenticated/automacoes'
+import { Route as AuthenticatedConfiguracoesRouteImport } from './routes/_authenticated/configuracoes'
+import { Route as AuthenticatedIntegracoesRouteImport } from './routes/_authenticated/integracoes'
+import { Route as AuthenticatedPedidosRouteImport } from './routes/_authenticated/pedidos'
+import { Route as AuthenticatedRecuperacaoRouteImport } from './routes/_authenticated/recuperacao'
+import { Route as AuthenticatedAutomacoesIndexRouteImport } from './routes/_authenticated/automacoes.index'
+import { Route as AuthenticatedAutomacoesIdRouteImport } from './routes/_authenticated/automacoes.$id'
+import { Route as ApiPublicCronRouteImport } from './routes/api/public/cron'
+import { Route as ApiPublicWebhookGatewayIdRouteImport } from './routes/api/public/webhook/$gatewayId'
+import { Route as ApiPublicInboxUserIdChannelRouteImport } from './routes/api/public/inbox/$userId.$channel'
 
-const IndexRoute = IndexRouteImport.update({
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AgentesRoute = AgentesRouteImport.update({
+const AuthenticatedAgentesRoute = AuthenticatedAgentesRouteImport.update({
   id: '/agentes',
   path: '/agentes',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AutomacoesRoute = AutomacoesRouteImport.update({
+const AuthenticatedAjudaRoute = AuthenticatedAjudaRouteImport.update({
+  id: '/ajuda',
+  path: '/ajuda',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAtendimentoRoute =
+  AuthenticatedAtendimentoRouteImport.update({
+    id: '/atendimento',
+    path: '/atendimento',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAutomacoesRoute = AuthenticatedAutomacoesRouteImport.update({
   id: '/automacoes',
   path: '/automacoes',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedConfiguracoesRoute =
+  AuthenticatedConfiguracoesRouteImport.update({
+    id: '/configuracoes',
+    path: '/configuracoes',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedIntegracoesRoute =
+  AuthenticatedIntegracoesRouteImport.update({
+    id: '/integracoes',
+    path: '/integracoes',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPedidosRoute = AuthenticatedPedidosRouteImport.update({
+  id: '/pedidos',
+  path: '/pedidos',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRecuperacaoRoute =
+  AuthenticatedRecuperacaoRouteImport.update({
+    id: '/recuperacao',
+    path: '/recuperacao',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAutomacoesIndexRoute =
+  AuthenticatedAutomacoesIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedAutomacoesRoute,
+  } as any)
+const AuthenticatedAutomacoesIdRoute =
+  AuthenticatedAutomacoesIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => AuthenticatedAutomacoesRoute,
+  } as any)
+const ApiPublicCronRoute = ApiPublicCronRouteImport.update({
+  id: '/api/public/cron',
+  path: '/api/public/cron',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CarrinhosRoute = CarrinhosRouteImport.update({
-  id: '/carrinhos',
-  path: '/carrinhos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ConexoesRoute = ConexoesRouteImport.update({
-  id: '/conexoes',
-  path: '/conexoes',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const ApiPublicWebhookGatewayIdRoute =
+  ApiPublicWebhookGatewayIdRouteImport.update({
+    id: '/api/public/webhook/$gatewayId',
+    path: '/api/public/webhook/$gatewayId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicInboxUserIdChannelRoute =
+  ApiPublicInboxUserIdChannelRouteImport.update({
+    id: '/api/public/inbox/$userId/$channel',
+    path: '/api/public/inbox/$userId/$channel',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/agentes': typeof AgentesRoute
-  '/automacoes': typeof AutomacoesRoute
-  '/carrinhos': typeof CarrinhosRoute
-  '/conexoes': typeof ConexoesRoute
+  '/': typeof AuthenticatedIndexRoute
+  '/auth': typeof AuthRoute
+  '/agentes': typeof AuthenticatedAgentesRoute
+  '/ajuda': typeof AuthenticatedAjudaRoute
+  '/atendimento': typeof AuthenticatedAtendimentoRoute
+  '/automacoes': typeof AuthenticatedAutomacoesRouteWithChildren
+  '/configuracoes': typeof AuthenticatedConfiguracoesRoute
+  '/integracoes': typeof AuthenticatedIntegracoesRoute
+  '/pedidos': typeof AuthenticatedPedidosRoute
+  '/recuperacao': typeof AuthenticatedRecuperacaoRoute
+  '/automacoes/$id': typeof AuthenticatedAutomacoesIdRoute
+  '/api/public/cron': typeof ApiPublicCronRoute
+  '/automacoes/': typeof AuthenticatedAutomacoesIndexRoute
+  '/api/public/webhook/$gatewayId': typeof ApiPublicWebhookGatewayIdRoute
+  '/api/public/inbox/$userId/$channel': typeof ApiPublicInboxUserIdChannelRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/agentes': typeof AgentesRoute
-  '/automacoes': typeof AutomacoesRoute
-  '/carrinhos': typeof CarrinhosRoute
-  '/conexoes': typeof ConexoesRoute
+  '/auth': typeof AuthRoute
+  '/agentes': typeof AuthenticatedAgentesRoute
+  '/ajuda': typeof AuthenticatedAjudaRoute
+  '/atendimento': typeof AuthenticatedAtendimentoRoute
+  '/configuracoes': typeof AuthenticatedConfiguracoesRoute
+  '/integracoes': typeof AuthenticatedIntegracoesRoute
+  '/pedidos': typeof AuthenticatedPedidosRoute
+  '/recuperacao': typeof AuthenticatedRecuperacaoRoute
+  '/': typeof AuthenticatedIndexRoute
+  '/automacoes/$id': typeof AuthenticatedAutomacoesIdRoute
+  '/api/public/cron': typeof ApiPublicCronRoute
+  '/automacoes': typeof AuthenticatedAutomacoesIndexRoute
+  '/api/public/webhook/$gatewayId': typeof ApiPublicWebhookGatewayIdRoute
+  '/api/public/inbox/$userId/$channel': typeof ApiPublicInboxUserIdChannelRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/agentes': typeof AgentesRoute
-  '/automacoes': typeof AutomacoesRoute
-  '/carrinhos': typeof CarrinhosRoute
-  '/conexoes': typeof ConexoesRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_authenticated/agentes': typeof AuthenticatedAgentesRoute
+  '/_authenticated/ajuda': typeof AuthenticatedAjudaRoute
+  '/_authenticated/atendimento': typeof AuthenticatedAtendimentoRoute
+  '/_authenticated/automacoes': typeof AuthenticatedAutomacoesRouteWithChildren
+  '/_authenticated/configuracoes': typeof AuthenticatedConfiguracoesRoute
+  '/_authenticated/integracoes': typeof AuthenticatedIntegracoesRoute
+  '/_authenticated/pedidos': typeof AuthenticatedPedidosRoute
+  '/_authenticated/recuperacao': typeof AuthenticatedRecuperacaoRoute
+  '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/automacoes/$id': typeof AuthenticatedAutomacoesIdRoute
+  '/api/public/cron': typeof ApiPublicCronRoute
+  '/_authenticated/automacoes/': typeof AuthenticatedAutomacoesIndexRoute
+  '/api/public/webhook/$gatewayId': typeof ApiPublicWebhookGatewayIdRoute
+  '/api/public/inbox/$userId/$channel': typeof ApiPublicInboxUserIdChannelRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/agentes' | '/automacoes' | '/carrinhos' | '/conexoes'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/agentes'
+    | '/ajuda'
+    | '/atendimento'
+    | '/automacoes'
+    | '/configuracoes'
+    | '/integracoes'
+    | '/pedidos'
+    | '/recuperacao'
+    | '/automacoes/$id'
+    | '/api/public/cron'
+    | '/automacoes/'
+    | '/api/public/webhook/$gatewayId'
+    | '/api/public/inbox/$userId/$channel'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/agentes' | '/automacoes' | '/carrinhos' | '/conexoes'
-  id: '__root__' | '/' | '/agentes' | '/automacoes' | '/carrinhos' | '/conexoes'
+  to:
+    | '/auth'
+    | '/agentes'
+    | '/ajuda'
+    | '/atendimento'
+    | '/configuracoes'
+    | '/integracoes'
+    | '/pedidos'
+    | '/recuperacao'
+    | '/'
+    | '/automacoes/$id'
+    | '/api/public/cron'
+    | '/automacoes'
+    | '/api/public/webhook/$gatewayId'
+    | '/api/public/inbox/$userId/$channel'
+  id:
+    | '__root__'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/agentes'
+    | '/_authenticated/ajuda'
+    | '/_authenticated/atendimento'
+    | '/_authenticated/automacoes'
+    | '/_authenticated/configuracoes'
+    | '/_authenticated/integracoes'
+    | '/_authenticated/pedidos'
+    | '/_authenticated/recuperacao'
+    | '/_authenticated/'
+    | '/_authenticated/automacoes/$id'
+    | '/api/public/cron'
+    | '/_authenticated/automacoes/'
+    | '/api/public/webhook/$gatewayId'
+    | '/api/public/inbox/$userId/$channel'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AgentesRoute: typeof AgentesRoute
-  AutomacoesRoute: typeof AutomacoesRoute
-  CarrinhosRoute: typeof CarrinhosRoute
-  ConexoesRoute: typeof ConexoesRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ApiPublicCronRoute: typeof ApiPublicCronRoute
+  ApiPublicWebhookGatewayIdRoute: typeof ApiPublicWebhookGatewayIdRoute
+  ApiPublicInboxUserIdChannelRoute: typeof ApiPublicInboxUserIdChannelRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/': {
+      id: '/_authenticated/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/agentes': {
-      id: '/agentes'
+    '/_authenticated/agentes': {
+      id: '/_authenticated/agentes'
       path: '/agentes'
       fullPath: '/agentes'
-      preLoaderRoute: typeof AgentesRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedAgentesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/automacoes': {
-      id: '/automacoes'
+    '/_authenticated/ajuda': {
+      id: '/_authenticated/ajuda'
+      path: '/ajuda'
+      fullPath: '/ajuda'
+      preLoaderRoute: typeof AuthenticatedAjudaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/atendimento': {
+      id: '/_authenticated/atendimento'
+      path: '/atendimento'
+      fullPath: '/atendimento'
+      preLoaderRoute: typeof AuthenticatedAtendimentoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/automacoes': {
+      id: '/_authenticated/automacoes'
       path: '/automacoes'
       fullPath: '/automacoes'
-      preLoaderRoute: typeof AutomacoesRouteImport
+      preLoaderRoute: typeof AuthenticatedAutomacoesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/configuracoes': {
+      id: '/_authenticated/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/configuracoes'
+      preLoaderRoute: typeof AuthenticatedConfiguracoesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/integracoes': {
+      id: '/_authenticated/integracoes'
+      path: '/integracoes'
+      fullPath: '/integracoes'
+      preLoaderRoute: typeof AuthenticatedIntegracoesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/pedidos': {
+      id: '/_authenticated/pedidos'
+      path: '/pedidos'
+      fullPath: '/pedidos'
+      preLoaderRoute: typeof AuthenticatedPedidosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/recuperacao': {
+      id: '/_authenticated/recuperacao'
+      path: '/recuperacao'
+      fullPath: '/recuperacao'
+      preLoaderRoute: typeof AuthenticatedRecuperacaoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/automacoes/': {
+      id: '/_authenticated/automacoes/'
+      path: '/'
+      fullPath: '/automacoes/'
+      preLoaderRoute: typeof AuthenticatedAutomacoesIndexRouteImport
+      parentRoute: typeof AuthenticatedAutomacoesRoute
+    }
+    '/_authenticated/automacoes/$id': {
+      id: '/_authenticated/automacoes/$id'
+      path: '/$id'
+      fullPath: '/automacoes/$id'
+      preLoaderRoute: typeof AuthenticatedAutomacoesIdRouteImport
+      parentRoute: typeof AuthenticatedAutomacoesRoute
+    }
+    '/api/public/cron': {
+      id: '/api/public/cron'
+      path: '/api/public/cron'
+      fullPath: '/api/public/cron'
+      preLoaderRoute: typeof ApiPublicCronRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/carrinhos': {
-      id: '/carrinhos'
-      path: '/carrinhos'
-      fullPath: '/carrinhos'
-      preLoaderRoute: typeof CarrinhosRouteImport
+    '/api/public/webhook/$gatewayId': {
+      id: '/api/public/webhook/$gatewayId'
+      path: '/api/public/webhook/$gatewayId'
+      fullPath: '/api/public/webhook/$gatewayId'
+      preLoaderRoute: typeof ApiPublicWebhookGatewayIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/conexoes': {
-      id: '/conexoes'
-      path: '/conexoes'
-      fullPath: '/conexoes'
-      preLoaderRoute: typeof ConexoesRouteImport
+    '/api/public/inbox/$userId/$channel': {
+      id: '/api/public/inbox/$userId/$channel'
+      path: '/api/public/inbox/$userId/$channel'
+      fullPath: '/api/public/inbox/$userId/$channel'
+      preLoaderRoute: typeof ApiPublicInboxUserIdChannelRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
 }
 
+interface AuthenticatedAutomacoesRouteChildren {
+  AuthenticatedAutomacoesIdRoute: typeof AuthenticatedAutomacoesIdRoute
+  AuthenticatedAutomacoesIndexRoute: typeof AuthenticatedAutomacoesIndexRoute
+}
+
+const AuthenticatedAutomacoesRouteChildren: AuthenticatedAutomacoesRouteChildren =
+  {
+    AuthenticatedAutomacoesIdRoute: AuthenticatedAutomacoesIdRoute,
+    AuthenticatedAutomacoesIndexRoute: AuthenticatedAutomacoesIndexRoute,
+  }
+
+const AuthenticatedAutomacoesRouteWithChildren =
+  AuthenticatedAutomacoesRoute._addFileChildren(
+    AuthenticatedAutomacoesRouteChildren,
+  )
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAgentesRoute: typeof AuthenticatedAgentesRoute
+  AuthenticatedAjudaRoute: typeof AuthenticatedAjudaRoute
+  AuthenticatedAtendimentoRoute: typeof AuthenticatedAtendimentoRoute
+  AuthenticatedAutomacoesRoute: typeof AuthenticatedAutomacoesRouteWithChildren
+  AuthenticatedConfiguracoesRoute: typeof AuthenticatedConfiguracoesRoute
+  AuthenticatedIntegracoesRoute: typeof AuthenticatedIntegracoesRoute
+  AuthenticatedPedidosRoute: typeof AuthenticatedPedidosRoute
+  AuthenticatedRecuperacaoRoute: typeof AuthenticatedRecuperacaoRoute
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAgentesRoute: AuthenticatedAgentesRoute,
+  AuthenticatedAjudaRoute: AuthenticatedAjudaRoute,
+  AuthenticatedAtendimentoRoute: AuthenticatedAtendimentoRoute,
+  AuthenticatedAutomacoesRoute: AuthenticatedAutomacoesRouteWithChildren,
+  AuthenticatedConfiguracoesRoute: AuthenticatedConfiguracoesRoute,
+  AuthenticatedIntegracoesRoute: AuthenticatedIntegracoesRoute,
+  AuthenticatedPedidosRoute: AuthenticatedPedidosRoute,
+  AuthenticatedRecuperacaoRoute: AuthenticatedRecuperacaoRoute,
+  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AgentesRoute: AgentesRoute,
-  AutomacoesRoute: AutomacoesRoute,
-  CarrinhosRoute: CarrinhosRoute,
-  ConexoesRoute: ConexoesRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ApiPublicCronRoute: ApiPublicCronRoute,
+  ApiPublicWebhookGatewayIdRoute: ApiPublicWebhookGatewayIdRoute,
+  ApiPublicInboxUserIdChannelRoute: ApiPublicInboxUserIdChannelRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
