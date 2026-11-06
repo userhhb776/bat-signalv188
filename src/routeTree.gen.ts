@@ -10,33 +10,73 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AgentesRouteImport } from './routes/agentes'
+import { Route as AutomacoesRouteImport } from './routes/automacoes'
+import { Route as CarrinhosRouteImport } from './routes/carrinhos'
+import { Route as ConexoesRouteImport } from './routes/conexoes'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AgentesRoute = AgentesRouteImport.update({
+  id: '/agentes',
+  path: '/agentes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AutomacoesRoute = AutomacoesRouteImport.update({
+  id: '/automacoes',
+  path: '/automacoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CarrinhosRoute = CarrinhosRouteImport.update({
+  id: '/carrinhos',
+  path: '/carrinhos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConexoesRoute = ConexoesRouteImport.update({
+  id: '/conexoes',
+  path: '/conexoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agentes': typeof AgentesRoute
+  '/automacoes': typeof AutomacoesRoute
+  '/carrinhos': typeof CarrinhosRoute
+  '/conexoes': typeof ConexoesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agentes': typeof AgentesRoute
+  '/automacoes': typeof AutomacoesRoute
+  '/carrinhos': typeof CarrinhosRoute
+  '/conexoes': typeof ConexoesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agentes': typeof AgentesRoute
+  '/automacoes': typeof AutomacoesRoute
+  '/carrinhos': typeof CarrinhosRoute
+  '/conexoes': typeof ConexoesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/agentes' | '/automacoes' | '/carrinhos' | '/conexoes'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/agentes' | '/automacoes' | '/carrinhos' | '/conexoes'
+  id: '__root__' | '/' | '/agentes' | '/automacoes' | '/carrinhos' | '/conexoes'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgentesRoute: typeof AgentesRoute
+  AutomacoesRoute: typeof AutomacoesRoute
+  CarrinhosRoute: typeof CarrinhosRoute
+  ConexoesRoute: typeof ConexoesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +88,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/agentes': {
+      id: '/agentes'
+      path: '/agentes'
+      fullPath: '/agentes'
+      preLoaderRoute: typeof AgentesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/automacoes': {
+      id: '/automacoes'
+      path: '/automacoes'
+      fullPath: '/automacoes'
+      preLoaderRoute: typeof AutomacoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/carrinhos': {
+      id: '/carrinhos'
+      path: '/carrinhos'
+      fullPath: '/carrinhos'
+      preLoaderRoute: typeof CarrinhosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conexoes': {
+      id: '/conexoes'
+      path: '/conexoes'
+      fullPath: '/conexoes'
+      preLoaderRoute: typeof ConexoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgentesRoute: AgentesRoute,
+  AutomacoesRoute: AutomacoesRoute,
+  CarrinhosRoute: CarrinhosRoute,
+  ConexoesRoute: ConexoesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
