@@ -39,14 +39,14 @@ export async function sendMessage(
         body: JSON.stringify({ chat_id: p.to, text: p.text }),
       });
       if (!r.ok) throw new Error(`Telegram ${r.status}: ${(await r.text()).slice(0, 200)}`);
-    } else if (p.channel === "email" && !(p.renderServerId ?? s.email_server_id) && process.env.BREVO_API_KEY) {
-      const lk = process.env.LOVABLE_API_KEY;
+    } else if (p.channel === "email" && !(p.renderServerId ?? s.email_server_id) && process.env["BREVO_API_KEY"]) {
+      const lk = process.env["LOVABLE_API_KEY"];
       if (!lk) throw new Error("LOVABLE_API_KEY ausente");
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.to)) throw new Error("E-mail do cliente inválido");
       const html = p.text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\n/g, "<br>");
       const r = await fetch("https://connector-gateway.lovable.dev/brevo/smtp/email", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${lk}`, "X-Connection-Api-Key": process.env.BREVO_API_KEY },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${lk}`, "X-Connection-Api-Key": process.env["BREVO_API_KEY"] },
         body: JSON.stringify({
           sender: { name: "Marketing Geral", email: "marketinggeralconta@gmail.com" },
           to: [{ email: p.to }],
