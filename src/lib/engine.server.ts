@@ -64,14 +64,20 @@ export async function askAI(s: Settings, messages: { role: "system" | "user" | "
   if (!s.ai_base_url) throw new Error("Configure a IA em Configurações");
   const base = s.ai_base_url.replace(/\/$/, "");
   const url = base + (/\/v1$/.test(base) ? "" : "/v1") + "/chat/completions";
-  const r = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", ...(s.ai_key ? { Authorization: `Bearer ${s.ai_key}` } : {}) },
-    body: JSON.stringify({ model: model || s.ai_model, messages, stream: false }),
-  });
-  const t = await r.text();
-  if (!r.ok) throw new Error(`IA ${r.status}: ${t.slice(0, 200)}`);
-  return String(JSON.parse(t).choices?.[0]?.message?.content ?? "");
+  const keys = [s.ai_key, ...String((s as { ai_backup_keys?: string }).ai_backup_keys ?? "").split(/\s+/)].filter((k, i, a) => k && a.indexOf(k) === i);
+  if (!keys.length) keys.push("");
+  let last = "";
+  for (const key of keys) {
+    const r = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...(key ? { Authorization: `Bearer ${key}` } : {}) },
+      body: JSON.stringify({ model: model || s.ai_model, messages, stream: false }),
+    });
+    const t = await r.text();
+    if (r.ok) return String(JSON.parse(t).choices?.[0]?.message?.content ?? "");
+    last = `IA ${r.status}: ${t.slice(0, 200)}`;
+  }
+  throw new Error(last);
 }
 
 const recipient = (o: Order, ch: Channel) => (ch === "email" ? o.customer_email : o.customer_phone);

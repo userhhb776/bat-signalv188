@@ -68,25 +68,25 @@
 
 :root {
   --radius: 0.75rem;
-  --background: oklch(0.15 0.02 260);
+  --background: oklch(0.1 0.015 265);
   --foreground: oklch(0.95 0.01 260);
-  --card: oklch(0.2 0.025 260);
+  --card: oklch(0.14 0.02 265);
   --card-foreground: oklch(0.95 0.01 260);
-  --popover: oklch(0.22 0.025 260);
+  --popover: oklch(0.16 0.02 265);
   --popover-foreground: oklch(0.95 0.01 260);
-  --primary: oklch(0.6 0.2 260);
+  --primary: oklch(0.72 0.15 225);
   --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.26 0.025 260);
+  --secondary: oklch(0.2 0.02 265);
   --secondary-foreground: oklch(0.95 0.01 260);
-  --muted: oklch(0.24 0.02 260);
+  --muted: oklch(0.18 0.02 265);
   --muted-foreground: oklch(0.7 0.02 260);
-  --accent: oklch(0.28 0.04 260);
+  --accent: oklch(0.22 0.04 260);
   --accent-foreground: oklch(0.95 0.01 260);
   --destructive: oklch(0.65 0.2 25);
   --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.3 0.025 260);
-  --input: oklch(0.32 0.025 260);
-  --ring: oklch(0.6 0.2 260);
+  --border: oklch(0.24 0.02 265);
+  --input: oklch(0.26 0.02 265);
+  --ring: oklch(0.72 0.15 225);
   --warning: oklch(0.85 0.17 90);
   --warning-foreground: oklch(0.2 0.03 90);
   --success: oklch(0.72 0.17 150);
@@ -95,8 +95,8 @@
   --chart-3: oklch(0.6 0.2 295);
   --chart-4: oklch(0.62 0.19 250);
   --chart-5: oklch(0.75 0.16 160);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
+  --sidebar: oklch(0.14 0.02 265);
+  --sidebar-foreground: oklch(0.95 0.01 260);
   --sidebar-primary: oklch(0.208 0.042 265.755);
   --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
   --sidebar-accent: oklch(0.968 0.007 247.896);
@@ -145,6 +145,7 @@
     border-color: var(--color-border);
   }
 
+  html { color-scheme: dark; }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -152,3 +153,4 @@
 }
 
 @media print { aside, header, .no-print { display: none !important; } }
+.react-flow { --xy-background-color: var(--background); --xy-controls-button-background-color: var(--card); --xy-controls-button-color: var(--foreground); --xy-edge-stroke: var(--muted-foreground); }

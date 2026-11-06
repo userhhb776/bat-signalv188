@@ -131,6 +131,33 @@ export type Database = {
         }
         Relationships: []
       }
+      funnels: {
+        Row: {
+          created_at: string
+          edges: Json
+          id: string
+          name: string
+          nodes: Json
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          edges?: Json
+          id?: string
+          name: string
+          nodes?: Json
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          edges?: Json
+          id?: string
+          name?: string
+          nodes?: Json
+          user_id?: string
+        }
+        Relationships: []
+      }
       gateways: {
         Row: {
           active: boolean
@@ -329,6 +356,7 @@ export type Database = {
       }
       settings: {
         Row: {
+          ai_backup_keys: string
           ai_base_url: string
           ai_key: string
           ai_model: string
@@ -346,6 +374,7 @@ export type Database = {
           whatsapp_server_id: string | null
         }
         Insert: {
+          ai_backup_keys?: string
           ai_base_url?: string
           ai_key?: string
           ai_model?: string
@@ -363,6 +392,7 @@ export type Database = {
           whatsapp_server_id?: string | null
         }
         Update: {
+          ai_backup_keys?: string
           ai_base_url?: string
           ai_key?: string
           ai_model?: string

@@ -17,11 +17,14 @@ import { Route as AuthenticatedAjudaRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedAtendimentoRouteImport } from './routes/_authenticated/atendimento'
 import { Route as AuthenticatedAutomacoesRouteImport } from './routes/_authenticated/automacoes'
 import { Route as AuthenticatedConfiguracoesRouteImport } from './routes/_authenticated/configuracoes'
+import { Route as AuthenticatedFunisRouteImport } from './routes/_authenticated/funis'
 import { Route as AuthenticatedIntegracoesRouteImport } from './routes/_authenticated/integracoes'
 import { Route as AuthenticatedPedidosRouteImport } from './routes/_authenticated/pedidos'
 import { Route as AuthenticatedRecuperacaoRouteImport } from './routes/_authenticated/recuperacao'
 import { Route as AuthenticatedAutomacoesIndexRouteImport } from './routes/_authenticated/automacoes.index'
 import { Route as AuthenticatedAutomacoesIdRouteImport } from './routes/_authenticated/automacoes.$id'
+import { Route as AuthenticatedFunisIndexRouteImport } from './routes/_authenticated/funis.index'
+import { Route as AuthenticatedFunisIdRouteImport } from './routes/_authenticated/funis.$id'
 import { Route as ApiPublicCronRouteImport } from './routes/api/public/cron'
 import { Route as ApiPublicWebhookGatewayIdRouteImport } from './routes/api/public/webhook/$gatewayId'
 import { Route as ApiPublicInboxUserIdChannelRouteImport } from './routes/api/public/inbox/$userId.$channel'
@@ -67,6 +70,11 @@ const AuthenticatedConfiguracoesRoute =
     path: '/configuracoes',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedFunisRoute = AuthenticatedFunisRouteImport.update({
+  id: '/funis',
+  path: '/funis',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedIntegracoesRoute =
   AuthenticatedIntegracoesRouteImport.update({
     id: '/integracoes',
@@ -96,6 +104,16 @@ const AuthenticatedAutomacoesIdRoute =
     path: '/$id',
     getParentRoute: () => AuthenticatedAutomacoesRoute,
   } as any)
+const AuthenticatedFunisIndexRoute = AuthenticatedFunisIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedFunisRoute,
+} as any)
+const AuthenticatedFunisIdRoute = AuthenticatedFunisIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AuthenticatedFunisRoute,
+} as any)
 const ApiPublicCronRoute = ApiPublicCronRouteImport.update({
   id: '/api/public/cron',
   path: '/api/public/cron',
@@ -122,12 +140,15 @@ export interface FileRoutesByFullPath {
   '/atendimento': typeof AuthenticatedAtendimentoRoute
   '/automacoes': typeof AuthenticatedAutomacoesRouteWithChildren
   '/configuracoes': typeof AuthenticatedConfiguracoesRoute
+  '/funis': typeof AuthenticatedFunisRouteWithChildren
   '/integracoes': typeof AuthenticatedIntegracoesRoute
   '/pedidos': typeof AuthenticatedPedidosRoute
   '/recuperacao': typeof AuthenticatedRecuperacaoRoute
   '/automacoes/$id': typeof AuthenticatedAutomacoesIdRoute
+  '/funis/$id': typeof AuthenticatedFunisIdRoute
   '/api/public/cron': typeof ApiPublicCronRoute
   '/automacoes/': typeof AuthenticatedAutomacoesIndexRoute
+  '/funis/': typeof AuthenticatedFunisIndexRoute
   '/api/public/webhook/$gatewayId': typeof ApiPublicWebhookGatewayIdRoute
   '/api/public/inbox/$userId/$channel': typeof ApiPublicInboxUserIdChannelRoute
 }
@@ -142,8 +163,10 @@ export interface FileRoutesByTo {
   '/recuperacao': typeof AuthenticatedRecuperacaoRoute
   '/': typeof AuthenticatedIndexRoute
   '/automacoes/$id': typeof AuthenticatedAutomacoesIdRoute
+  '/funis/$id': typeof AuthenticatedFunisIdRoute
   '/api/public/cron': typeof ApiPublicCronRoute
   '/automacoes': typeof AuthenticatedAutomacoesIndexRoute
+  '/funis': typeof AuthenticatedFunisIndexRoute
   '/api/public/webhook/$gatewayId': typeof ApiPublicWebhookGatewayIdRoute
   '/api/public/inbox/$userId/$channel': typeof ApiPublicInboxUserIdChannelRoute
 }
@@ -156,13 +179,16 @@ export interface FileRoutesById {
   '/_authenticated/atendimento': typeof AuthenticatedAtendimentoRoute
   '/_authenticated/automacoes': typeof AuthenticatedAutomacoesRouteWithChildren
   '/_authenticated/configuracoes': typeof AuthenticatedConfiguracoesRoute
+  '/_authenticated/funis': typeof AuthenticatedFunisRouteWithChildren
   '/_authenticated/integracoes': typeof AuthenticatedIntegracoesRoute
   '/_authenticated/pedidos': typeof AuthenticatedPedidosRoute
   '/_authenticated/recuperacao': typeof AuthenticatedRecuperacaoRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/automacoes/$id': typeof AuthenticatedAutomacoesIdRoute
+  '/_authenticated/funis/$id': typeof AuthenticatedFunisIdRoute
   '/api/public/cron': typeof ApiPublicCronRoute
   '/_authenticated/automacoes/': typeof AuthenticatedAutomacoesIndexRoute
+  '/_authenticated/funis/': typeof AuthenticatedFunisIndexRoute
   '/api/public/webhook/$gatewayId': typeof ApiPublicWebhookGatewayIdRoute
   '/api/public/inbox/$userId/$channel': typeof ApiPublicInboxUserIdChannelRoute
 }
@@ -176,12 +202,15 @@ export interface FileRouteTypes {
     | '/atendimento'
     | '/automacoes'
     | '/configuracoes'
+    | '/funis'
     | '/integracoes'
     | '/pedidos'
     | '/recuperacao'
     | '/automacoes/$id'
+    | '/funis/$id'
     | '/api/public/cron'
     | '/automacoes/'
+    | '/funis/'
     | '/api/public/webhook/$gatewayId'
     | '/api/public/inbox/$userId/$channel'
   fileRoutesByTo: FileRoutesByTo
@@ -196,8 +225,10 @@ export interface FileRouteTypes {
     | '/recuperacao'
     | '/'
     | '/automacoes/$id'
+    | '/funis/$id'
     | '/api/public/cron'
     | '/automacoes'
+    | '/funis'
     | '/api/public/webhook/$gatewayId'
     | '/api/public/inbox/$userId/$channel'
   id:
@@ -209,13 +240,16 @@ export interface FileRouteTypes {
     | '/_authenticated/atendimento'
     | '/_authenticated/automacoes'
     | '/_authenticated/configuracoes'
+    | '/_authenticated/funis'
     | '/_authenticated/integracoes'
     | '/_authenticated/pedidos'
     | '/_authenticated/recuperacao'
     | '/_authenticated/'
     | '/_authenticated/automacoes/$id'
+    | '/_authenticated/funis/$id'
     | '/api/public/cron'
     | '/_authenticated/automacoes/'
+    | '/_authenticated/funis/'
     | '/api/public/webhook/$gatewayId'
     | '/api/public/inbox/$userId/$channel'
   fileRoutesById: FileRoutesById
@@ -286,6 +320,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedConfiguracoesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/funis': {
+      id: '/_authenticated/funis'
+      path: '/funis'
+      fullPath: '/funis'
+      preLoaderRoute: typeof AuthenticatedFunisRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/integracoes': {
       id: '/_authenticated/integracoes'
       path: '/integracoes'
@@ -320,6 +361,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/automacoes/$id'
       preLoaderRoute: typeof AuthenticatedAutomacoesIdRouteImport
       parentRoute: typeof AuthenticatedAutomacoesRoute
+    }
+    '/_authenticated/funis/': {
+      id: '/_authenticated/funis/'
+      path: '/'
+      fullPath: '/funis/'
+      preLoaderRoute: typeof AuthenticatedFunisIndexRouteImport
+      parentRoute: typeof AuthenticatedFunisRoute
+    }
+    '/_authenticated/funis/$id': {
+      id: '/_authenticated/funis/$id'
+      path: '/$id'
+      fullPath: '/funis/$id'
+      preLoaderRoute: typeof AuthenticatedFunisIdRouteImport
+      parentRoute: typeof AuthenticatedFunisRoute
     }
     '/api/public/cron': {
       id: '/api/public/cron'
@@ -361,12 +416,26 @@ const AuthenticatedAutomacoesRouteWithChildren =
     AuthenticatedAutomacoesRouteChildren,
   )
 
+interface AuthenticatedFunisRouteChildren {
+  AuthenticatedFunisIdRoute: typeof AuthenticatedFunisIdRoute
+  AuthenticatedFunisIndexRoute: typeof AuthenticatedFunisIndexRoute
+}
+
+const AuthenticatedFunisRouteChildren: AuthenticatedFunisRouteChildren = {
+  AuthenticatedFunisIdRoute: AuthenticatedFunisIdRoute,
+  AuthenticatedFunisIndexRoute: AuthenticatedFunisIndexRoute,
+}
+
+const AuthenticatedFunisRouteWithChildren =
+  AuthenticatedFunisRoute._addFileChildren(AuthenticatedFunisRouteChildren)
+
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAgentesRoute: typeof AuthenticatedAgentesRoute
   AuthenticatedAjudaRoute: typeof AuthenticatedAjudaRoute
   AuthenticatedAtendimentoRoute: typeof AuthenticatedAtendimentoRoute
   AuthenticatedAutomacoesRoute: typeof AuthenticatedAutomacoesRouteWithChildren
   AuthenticatedConfiguracoesRoute: typeof AuthenticatedConfiguracoesRoute
+  AuthenticatedFunisRoute: typeof AuthenticatedFunisRouteWithChildren
   AuthenticatedIntegracoesRoute: typeof AuthenticatedIntegracoesRoute
   AuthenticatedPedidosRoute: typeof AuthenticatedPedidosRoute
   AuthenticatedRecuperacaoRoute: typeof AuthenticatedRecuperacaoRoute
@@ -379,6 +448,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAtendimentoRoute: AuthenticatedAtendimentoRoute,
   AuthenticatedAutomacoesRoute: AuthenticatedAutomacoesRouteWithChildren,
   AuthenticatedConfiguracoesRoute: AuthenticatedConfiguracoesRoute,
+  AuthenticatedFunisRoute: AuthenticatedFunisRouteWithChildren,
   AuthenticatedIntegracoesRoute: AuthenticatedIntegracoesRoute,
   AuthenticatedPedidosRoute: AuthenticatedPedidosRoute,
   AuthenticatedRecuperacaoRoute: AuthenticatedRecuperacaoRoute,

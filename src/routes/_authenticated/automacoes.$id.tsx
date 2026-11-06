@@ -145,7 +145,7 @@ function Editor({ flow }: { flow: NonNullable<ReturnType<typeof useRows<"flows">
         <div className="flex-1">
           <ReactFlow colorMode="dark" nodes={nodes} edges={edges} nodeTypes={nodeTypes} onNodesChange={onNodesChange} onEdgesChange={onEdgesChange}
             onConnect={onConnect} onNodeClick={(_, n) => setSel(n.id)} onPaneClick={() => setSel(null)} fitView deleteKeyCode={["Backspace", "Delete"]}>
-            <Background gap={16} />
+            <Background gap={16} color="var(--border)" />
             <Controls />
           </ReactFlow>
         </div>

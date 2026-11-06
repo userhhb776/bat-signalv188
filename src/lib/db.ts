@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 
 type T = Database["public"]["Tables"];
-export type TableName = "render_servers" | "gateways" | "orders" | "agents" | "flows" | "messages";
+export type TableName = "render_servers" | "gateways" | "orders" | "agents" | "flows" | "messages" | "funnels";
 export type Row<N extends keyof T> = T[N]["Row"];
 
 async function uid() {

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { BarChart3, Bell, Bot, CircleDollarSign, HelpCircle, List, LogOut, Megaphone, Menu, MessagesSquare, Puzzle, Settings, ChevronDown } from "lucide-react";
+import { BarChart3, Bell, Bot, CircleDollarSign, HelpCircle, List, LogOut, Megaphone, Menu, MessagesSquare, Puzzle, Settings, ChevronDown, Filter } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useRows, useSettings } from "@/lib/db";
@@ -13,6 +13,7 @@ const nav = [
   { to: "/recuperacao", label: "Recuperação de vendas", icon: CircleDollarSign },
   { to: "/agentes", label: "Chatbots / Agentes de IA", icon: Bot },
   { to: "/automacoes", label: "Automações", icon: Megaphone },
+  { to: "/funis", label: "Funis PV", icon: Filter },
   { to: "/integracoes", label: "Integrações", icon: Puzzle },
   { to: "/configuracoes", label: "Configurações", icon: Settings },
   { to: "/ajuda", label: "Ajuda", icon: HelpCircle },

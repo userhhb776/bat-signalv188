@@ -79,6 +79,8 @@ function Form({ initial }: { initial: S }) {
             <F label="Modelo" v={s.ai_model} on={(v) => set({ ai_model: v })} />
             <F label="Chave da API" type="password" v={s.ai_key} on={(v) => set({ ai_key: v })} />
           </div>
+          <div className="space-y-1"><Label className="text-xs">Chaves reserva (uma por linha — usadas se a principal falhar ou acabar o crédito)</Label>
+            <textarea rows={3} value={s.ai_backup_keys} onChange={(e) => set({ ai_backup_keys: e.target.value })} className="w-full rounded-md border border-input bg-background px-3 py-2 font-mono text-xs" /></div>
           <p className="text-xs text-muted-foreground">O Ollama precisa estar acessível pela internet (não só no seu computador).</p>
         </Card>
 
